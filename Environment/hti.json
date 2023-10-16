@@ -1,0 +1,39 @@
+{
+	"id": "26712dac-c375-456e-b64c-56aac95fc740",
+	"name": "SDC Cancelamento e antecipação",
+	"values": [
+		{
+			"key": "URIcancelamento",
+			"value": "https://psf-api-hti.getnet.com.br/psf/v1/",
+			"type": "default",
+			"enabled": false
+		},
+		{
+			"key": "base_URI",
+			"value": "https://psf-api-hti.getnet.com.br/psf/v1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "tests",
+			"value": "var expect = require(\"chai\").expect;\n/**\n * Verifica o status da resposta\n * @param {number} status valor numerico referente ao status desperado da requisicao\n */\ncheckStatus = (status) => {\n    (pm.test)(`Should return status ${status}`, () => {\n        pm.response.to.have.status(status);\n    })\n};\n/**\n * Checa se parametro retornou com o tamanho esperado\n * @param {string} param nome do parametro\n * @param {number} length tamanho esperado do parametro\n */\nparamHasLength = (paramName, param,length) => {\n    (pm.test)(`Length of ${paramName} should be ${length}`, () =>{\n        expect(param).to.have.lengthOf(length);\n    })\n}\n/**\n  * Checa se o valor de um campo eh o esperado. Se o caminho informado retorna uma lista, checa se veio preenchida. \n  * @param {Object} infos objeto que contem as informacoes esperadas (nome_do_parametro: {path,expect} // path: caminho na resposta, expect: valor esperado)\n */\ncheckReturnValues = (infos) => {\n    Object.entries(infos).forEach(\n        ([k, v]) => {\n            name = typeof v['reduceTo'] !== 'undefined' ?\n                v['reduceTo'] : v['expect'];\n            (pm.test)(`[ ${k} ] should return [ ${name} ]`, () => {\n                try{\n                    isArray = name.includes(\"array\");\n                } catch (e) {\n                    isArray = false;\n                }\n                if(isArray){\n                    pm.expect(v['path'].length).to.be.above(0);\n                } else {\n                    pm.expect((v['path'])).to.eql(v['expect']);\n                }\n            })\n        });\n}\n/**\n  * Verifica se o tipo dos parametros da resposta sao conforme esperado\n  * @param {Object} infos objeto que contem as informacoes esperadas (nome_do_parametro: {path,expect} // path: caminho na resposta, expect: tipo da variavel)\n*/\ncheckType = (infos) => {\n    Object.entries(infos).forEach(\n        ([k, v]) => {\n            (pm.test)(`Type of [ ${k} ] should be [ ${v['expect']} ]`, () => {\n                pm.expect(typeof v['path']).to.eql(v['expect']);\n            })\n        }\n    )\n}\n/**\n  * Valida contrato de resposta a partir de schema \n  * @param {string} schemaInfo nome da variavel (de ambiente ou local) que contem o schema \n  * @param {json} response resposta da requisicao em json \n*/\ncontractValidation = (schemaInfo, response) => {\n    if(pm.environment.get(schemaInfo) === undefined){\n        schema = schemaInfo;\n    }\n    else{\n        schema = JSON.parse(pm.environment.get(schemaInfo));\n    }\n    var Ajv = require('ajv'),\n        ajv = new Ajv({\n            logger: console,\n            meta: false\n        }),\n        schema;\n    (pm.test)('Contract validation', () => {\n        pm.expect(ajv.validate(schema, response), JSON.stringify(ajv.errors)).to.be.true;\n    });\n}",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "schema_SCD",
+			"value": "retornoNegativo = () => JSON.stringify({\n    \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n    \"type\": \"object\",\n    \"properties\": {\n      \"timestamp\": {\n        \"type\": \"string\"\n      },\n      \"status\": {\n        \"type\": \"integer\"\n      },\n      \"error\": {\n        \"type\": \"string\"\n      },\n      \"message\": {\n        \"type\": \"string\"\n      },\n      \"path\": {\n        \"type\": \"string\"\n      }\n    },\n    \"required\": [\n      \"timestamp\",\n      \"status\",\n      \"error\",\n      \"message\",\n      \"path\"\n    ]\n  })\n  ",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "constants_returned_values",
+			"value": "not_found = (response, status, error, path) => JSON.stringify({\n    'status': {\n        'path': response.status,\n        'expect': status\n    },\n    'error': {\n        'path': response.error,\n        'expect': error\n    },\n    'path': {\n        'path': response.path,\n        'expect': path\n    }\n})\nUnprocessable_Entify = (response, globalMessage, message) => JSON.stringify({\n  'globalMessage': {\n      'path': response.globalMessage,\n      'expect': globalMessage\n  },\n  'messages': {\n    'path': response.messages[0].message,\n    'expect': message\n    }\n})\nUnprocessable_Entify2 = (response, globalMessage, message) => JSON.stringify({\n    'globalMessage': {\n        'path': response.globalMessage,\n        'expect': globalMessage\n    },\n    'messages': {\n      'path': response.messages[0].message,\n      'expect': message\n      }\n  \n  })\n\n",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2022-12-22T13:47:28.764Z",
+	"_postman_exported_using": "Postman/10.6.7"
+}

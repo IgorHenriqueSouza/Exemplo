@@ -1,0 +1,1770 @@
+{
+	"info": {
+		"_postman_id": "fdc4e3e1-b1e3-4482-b5af-1bad0b91f20c",
+		"name": "SCD Cancelamento e antecipação",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15883939"
+	},
+	"item": [
+		{
+			"name": "Contrato - /contrato/cancelar",
+			"item": [
+				{
+					"name": "TipoPagamento",
+					"item": [
+						{
+							"name": "Negativo",
+							"item": [
+								{
+									"name": "Status 422",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"\r",
+													"let schema =  {\r",
+													"   \"type\" : \"object\" ,\r",
+													"   \"properties\" : {\r",
+													"     \"dataResposta\" : {\r",
+													"       \"type\" : \"string\"\r",
+													"    },\r",
+													"    \"globalMessage\" : {\r",
+													"       \"tipo\" : \"string\"\r",
+													"    },\r",
+													"    \"detalhe\" : {\r",
+													"       \"tipo\" : \"objeto\"\r",
+													"    },\r",
+													"    \"messages\" : {\r",
+													"       \"type\" : \"array\" ,\r",
+													"       \"items\" : [\r",
+													"        {\r",
+													"          \"type\" : \"object\" ,\r",
+													"           \"properties\" : {\r",
+													"             \"message\" : {\r",
+													"               \"type\" : \"string\"\r",
+													"            }\r",
+													"          },\r",
+													"          \"obrigatório\" : [\r",
+													"             \"mensagem\"\r",
+													"          ]\r",
+													"        }\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\" : [\r",
+													"     \"dataResposta\" ,\r",
+													"     \"globalMessage\" ,\r",
+													"     \"detail\" ,\r",
+													"     \"messages\"\r",
+													"  ]\r",
+													"};\r",
+													"\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (422)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"let globalMessage = \"Contrato - Erro de validação de dados\";\r",
+													"let messages = \"O tipo de pagamento deve ser informado (BOLETO ou DEBITO)\";\r",
+													"\r",
+													"try{\r",
+													"    var failureInfos = JSON.parse(Unprocessable_Entify2(response, globalMessage, messages))\r",
+													"    checkReturnValues(failureInfos)\r",
+													"}catch(error){\r",
+													"    pm.test(\"Failed to check values in response body\", () => {\r",
+													"        pm.expect(response.globalMessage).to.be.eql(\"Contrato - Erro de validação de dados\")\r",
+													"        pm.expect(response.messages[0].message).to.be.eql('O tipo de pagamento deve ser informado (BOLETO ou DEBITO)')\r",
+													"    });\r",
+													"\r",
+													"}  \r",
+													"\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"500\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/contrato/cancelar",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"contrato",
+												"cancelar"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "NumeroContrato",
+					"item": [
+						{
+							"name": "Negativo",
+							"item": [
+								{
+									"name": "Status 422",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"\r",
+													"let schema =  {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"dataResposta\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"globalMessage\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"detail\": {\r",
+													"      \"type\": \"object\"\r",
+													"    },\r",
+													"    \"messages\": {\r",
+													"      \"type\": \"array\",\r",
+													"      \"items\": [\r",
+													"        {\r",
+													"          \"type\": \"object\",\r",
+													"          \"properties\": {\r",
+													"            \"message\": {\r",
+													"              \"type\": \"string\"\r",
+													"            }\r",
+													"          },\r",
+													"          \"required\": [\r",
+													"            \"message\"\r",
+													"          ]\r",
+													"        }\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"dataResposta\",\r",
+													"    \"globalMessage\",\r",
+													"    \"detail\",\r",
+													"    \"messages\"\r",
+													"  ]\r",
+													"};\r",
+													"\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (422)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"let globalMessage = \"Erro de sistema não esperado: \";\r",
+													"let messages = \"Contrato não existente\";\r",
+													"    \r",
+													"try{\r",
+													"    var failureInfos = JSON.parse(Unprocessable_Entify2(response, globalMessage, messages))\r",
+													"    checkReturnValues(failureInfos)\r",
+													"}catch(error){\r",
+													"    pm.test(\"Failed to check values in response body\", () => {\r",
+													"        pm.expect(response.globalMessage).to.be.eql(\"Erro de sistema não esperado: \")\r",
+													"        pm.expect(response.messages[0].message).to.be.eql('Contrato não existente')\r",
+													"    });\r",
+													"\r",
+													"}  \r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"484\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/contrato/cancelar",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"contrato",
+												"cancelar"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Status 422",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"\r",
+													"let schema =  {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"dataResposta\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"globalMessage\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"detail\": {\r",
+													"      \"type\": \"object\"\r",
+													"    },\r",
+													"    \"messages\": {\r",
+													"      \"type\": \"array\",\r",
+													"      \"items\": [\r",
+													"        {\r",
+													"          \"type\": \"object\",\r",
+													"          \"properties\": {\r",
+													"            \"message\": {\r",
+													"              \"type\": \"string\"\r",
+													"            }\r",
+													"          },\r",
+													"          \"required\": [\r",
+													"            \"message\"\r",
+													"          ]\r",
+													"        }\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"dataResposta\",\r",
+													"    \"globalMessage\",\r",
+													"    \"detail\",\r",
+													"    \"messages\"\r",
+													"  ]\r",
+													"};\r",
+													"\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (422)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"let globalMessage = \"Contrato - Erro de validação de dados\";\r",
+													"let messages = \"O número do contrato deve ser informado\";\r",
+													"    \r",
+													"try{\r",
+													"    var failureInfos = JSON.parse(Unprocessable_Entify2(response, globalMessage, messages))\r",
+													"    checkReturnValues(failureInfos)\r",
+													"}catch(error){\r",
+													"    pm.test(\"Failed to check values in response body\", () => {\r",
+													"        pm.expect(response.globalMessage).to.be.eql(\"O número do contrato deve ser informado\")\r",
+													"        pm.expect(response.messages[0].message).to.be.eql('O número do contrato deve ser informado')\r",
+													"    });\r",
+													"\r",
+													"}  \r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/contrato/cancelar",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"contrato",
+												"cancelar"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "numeroProposta",
+					"item": [
+						{
+							"name": "Negativo",
+							"item": [
+								{
+									"name": "Status 422",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"\r",
+													"let schema =  {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"dataResposta\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"globalMessage\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"detail\": {\r",
+													"      \"type\": \"object\"\r",
+													"    },\r",
+													"    \"messages\": {\r",
+													"      \"type\": \"array\",\r",
+													"      \"items\": [\r",
+													"        {\r",
+													"          \"type\": \"object\",\r",
+													"          \"properties\": {\r",
+													"            \"message\": {\r",
+													"              \"type\": \"string\"\r",
+													"            }\r",
+													"          },\r",
+													"          \"required\": [\r",
+													"            \"message\"\r",
+													"          ]\r",
+													"        }\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"dataResposta\",\r",
+													"    \"globalMessage\",\r",
+													"    \"detail\",\r",
+													"    \"messages\"\r",
+													"  ]\r",
+													"};\r",
+													"\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (422)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"let globalMessage = \"Erro de sistema não esperado: \";\r",
+													"let messages = \"O contrato não pode ser cancelado. Contrato efetivado há mais de 7 dias\";\r",
+													"let exception = null;\r",
+													"    \r",
+													"try{\r",
+													"    var failureInfos = JSON.parse(Unprocessable_Entify2(response, globalMessage, messages,exception))\r",
+													"    checkReturnValues(failureInfos)\r",
+													"}catch(error){\r",
+													"    pm.test(\"Failed to check values in response body\", () => {\r",
+													"        pm.expect(response.globalMessage).to.be.eql(\"Contrato - Erro de validação de dados\")\r",
+													"        pm.expect(response.messages[0].message).to.be.eql('O contrato não pode ser cancelado. Contrato efetivado há mais de 7 dias')\r",
+													"    });\r",
+													"\r",
+													"}  \r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 0,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"DEBITO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/contrato/cancelar",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"contrato",
+												"cancelar"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Status 400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"let schema = {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"message\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"name\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"status_code\": {\r",
+													"      \"type\": \"integer\"\r",
+													"    },\r",
+													"    \"details\": {\r",
+													"      \"type\": \"array\",\r",
+													"      \"items\": [\r",
+													"        {\r",
+													"          \"type\": \"object\",\r",
+													"          \"properties\": {\r",
+													"            \"status\": {\r",
+													"              \"type\": \"string\"\r",
+													"            },\r",
+													"            \"error_code\": {\r",
+													"              \"type\": \"string\"\r",
+													"            },\r",
+													"            \"description\": {\r",
+													"              \"type\": \"string\"\r",
+													"            },\r",
+													"            \"description_detail\": {\r",
+													"              \"type\": \"string\"\r",
+													"            }\r",
+													"          },\r",
+													"          \"required\": [\r",
+													"            \"status\",\r",
+													"            \"error_code\",\r",
+													"            \"description\",\r",
+													"            \"description_detail\"\r",
+													"          ]\r",
+													"        }\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"message\",\r",
+													"    \"name\",\r",
+													"    \"status_code\",\r",
+													"    \"details\"\r",
+													"  ]\r",
+													"}\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (400)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"/* let status = 400;\r",
+													"let error = \"Bad Request\";\r",
+													"let path = \"/contrato/cancelar\";\r",
+													" var failureInfos = JSON.parse(not_found(response, status, error, path))\r",
+													"     checkReturnValues(failureInfos)\r",
+													"\r",
+													"try{\r",
+													"   \r",
+													"}catch(error){\r",
+													"    pm.test(\"Failed to check values in response body\", () => {\r",
+													"        pm.expect(response.status).to.be.eql(400)\r",
+													"        pm.expect(response.error).to.be.eql('Bad Request')\r",
+													"        pm.expect(response.path).to.be.eql('/contrato/cancelar')\r",
+													"    });\r",
+													"\r",
+													"}  \r",
+													"  */\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 0561654654656,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/contrato/cancelar",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"contrato",
+												"cancelar"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Parcela - /parcela/calcularAntecipacao",
+			"item": [
+				{
+					"name": "TipoPagamento",
+					"item": [
+						{
+							"name": "Status 422",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"eval(pm.environment.get(\"tests\"));\r",
+											"eval(pm.environment.get(\"constants_returned_values\"));\r",
+											"let schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"dataResposta\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"globalMessage\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"detail\": {\r",
+											"      \"type\": \"object\"\r",
+											"    },\r",
+											"    \"messages\": {\r",
+											"      \"type\": \"array\",\r",
+											"      \"items\": {}\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\r",
+											"    \"dataResposta\",\r",
+											"    \"globalMessage\",\r",
+											"    \"detail\",\r",
+											"    \"messages\"\r",
+											"  ]\r",
+											"}\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"checkStatus (422)\r",
+											"contractValidation(schema,response);\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"DEBITO\",\r\n  \"valorDoContrato\": 0\r\n}"
+								},
+								"url": {
+									"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/calcularAntecipacao",
+									"protocol": "https",
+									"host": [
+										"psf-api-hti",
+										"getnet",
+										"com",
+										"br"
+									],
+									"path": [
+										"psf",
+										"v1",
+										"parcela",
+										"calcularAntecipacao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status 422",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"eval(pm.environment.get(\"tests\"));\r",
+											"eval(pm.environment.get(\"constants_returned_values\"));\r",
+											"let schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"dataResposta\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"globalMessage\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"detail\": {\r",
+											"      \"type\": \"object\"\r",
+											"    },\r",
+											"    \"messages\": {\r",
+											"      \"type\": \"array\",\r",
+											"      \"items\": {}\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\r",
+											"    \"dataResposta\",\r",
+											"    \"globalMessage\",\r",
+											"    \"detail\",\r",
+											"    \"messages\"\r",
+											"  ]\r",
+											"}\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"checkStatus (422)\r",
+											"contractValidation(schema,response);\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"\",\r\n  \"valorDoContrato\": 0\r\n}"
+								},
+								"url": {
+									"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/calcularAntecipacao",
+									"protocol": "https",
+									"host": [
+										"psf-api-hti",
+										"getnet",
+										"com",
+										"br"
+									],
+									"path": [
+										"psf",
+										"v1",
+										"parcela",
+										"calcularAntecipacao"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "numeroProposta",
+					"item": [
+						{
+							"name": "Negativo",
+							"item": [
+								{
+									"name": "Status 422 - PRECISA DE ATENÇÂO",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"\r",
+													"let schema =  {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"dataResposta\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"globalMessage\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"detail\": {\r",
+													"      \"type\": \"object\"\r",
+													"    },\r",
+													"    \"messages\": {\r",
+													"      \"type\": \"array\",\r",
+													"      \"items\": [\r",
+													"        {\r",
+													"          \"type\": \"object\",\r",
+													"          \"properties\": {\r",
+													"            \"message\": {\r",
+													"              \"type\": \"string\"\r",
+													"            }\r",
+													"          },\r",
+													"          \"required\": [\r",
+													"            \"message\"\r",
+													"          ]\r",
+													"        }\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"dataResposta\",\r",
+													"    \"globalMessage\",\r",
+													"    \"detail\",\r",
+													"    \"messages\"\r",
+													"  ]\r",
+													"};\r",
+													"\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (422)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": \"5415665465464\",\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/calcularAntecipacao",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"parcela",
+												"calcularAntecipacao"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Status 400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"let schema = {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"timestamp\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"status\": {\r",
+													"      \"type\": \"integer\"\r",
+													"    },\r",
+													"    \"error\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"message\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"path\": {\r",
+													"      \"type\": \"string\"\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"timestamp\",\r",
+													"    \"status\",\r",
+													"    \"error\",\r",
+													"    \"message\",\r",
+													"    \"path\"\r",
+													"  ]\r",
+													"}\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (400)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"\r",
+													" \r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 05616546546546546466,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/calcularAntecipacao",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"parcela",
+												"calcularAntecipacao"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "NumeroContrato",
+					"item": [
+						{
+							"name": "Negativo",
+							"item": [
+								{
+									"name": "Status 422",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"\r",
+													"let schema =  {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"dataResposta\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"globalMessage\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"detail\": {\r",
+													"      \"type\": \"object\"\r",
+													"    },\r",
+													"    \"messages\": {\r",
+													"      \"type\": \"array\",\r",
+													"      \"items\": [\r",
+													"        {\r",
+													"          \"type\": \"object\",\r",
+													"          \"properties\": {\r",
+													"            \"message\": {\r",
+													"              \"type\": \"string\"\r",
+													"            }\r",
+													"          },\r",
+													"          \"required\": [\r",
+													"            \"message\"\r",
+													"          ]\r",
+													"        }\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"dataResposta\",\r",
+													"    \"globalMessage\",\r",
+													"    \"detail\",\r",
+													"    \"messages\"\r",
+													"  ]\r",
+													"};\r",
+													"\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (422)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"let globalMessage = \"Erro ao validar dados recebidos\";\r",
+													"let messages = \"O número do contrato deve ser informado\";\r",
+													"let exception = null;\r",
+													"    \r",
+													"try{\r",
+													"    var failureInfos = JSON.parse(Unprocessable_Entify2(response, globalMessage, messages,exception))\r",
+													"    checkReturnValues(failureInfos)\r",
+													"}catch(error){\r",
+													"    pm.test(\"Failed to check values in response body\", () => {\r",
+													"        pm.expect(response.globalMessage).to.be.eql(\"Erro ao validar dados recebidos\")\r",
+													"        pm.expect(response.messages[0].message).to.be.eql('O número do contrato deve ser informado')\r",
+													"    });\r",
+													"\r",
+													"}  \r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/calcularAntecipacao",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"parcela",
+												"calcularAntecipacao"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Status 422",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"\r",
+													"let schema =  {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"dataResposta\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"globalMessage\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"detail\": {\r",
+													"      \"type\": \"object\"\r",
+													"    },\r",
+													"    \"messages\": {\r",
+													"      \"type\": \"array\",\r",
+													"      \"items\": [\r",
+													"        {\r",
+													"          \"type\": \"object\",\r",
+													"          \"properties\": {\r",
+													"            \"message\": {\r",
+													"              \"type\": \"string\"\r",
+													"            }\r",
+													"          },\r",
+													"          \"required\": [\r",
+													"            \"message\"\r",
+													"          ]\r",
+													"        }\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"dataResposta\",\r",
+													"    \"globalMessage\",\r",
+													"    \"detail\",\r",
+													"    \"messages\"\r",
+													"  ]\r",
+													"};\r",
+													"\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (422)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"484\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/calcularAntecipacao",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"parcela",
+												"calcularAntecipacao"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Parcela - /parcela/pagarParcelas",
+			"item": [
+				{
+					"name": "TipoPagamento",
+					"item": [
+						{
+							"name": "Status 400",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"eval(pm.environment.get(\"tests\"));\r",
+											"eval(pm.environment.get(\"constants_returned_values\"));\r",
+											"let schema = {\r",
+											"\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"dataResposta\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"globalMessage\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"detail\": {\r",
+											"      \"type\": \"object\"\r",
+											"    },\r",
+											"    \"messages\": {\r",
+											"      \"type\": \"array\",\r",
+											"      \"items\": [\r",
+											"        {\r",
+											"          \"type\": \"object\",\r",
+											"          \"properties\": {\r",
+											"            \"message\": {\r",
+											"              \"type\": \"string\"\r",
+											"            }\r",
+											"          },\r",
+											"          \"required\": [\r",
+											"            \"message\"\r",
+											"          ]\r",
+											"        }\r",
+											"      ]\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\r",
+											"    \"dataResposta\",\r",
+											"    \"globalMessage\",\r",
+											"    \"detail\",\r",
+											"    \"messages\"\r",
+											"  ]\r",
+											"}\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"checkStatus (422)\r",
+											"contractValidation(schema,response);\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"500\",\r\n  \"valorDoContrato\": 0\r\n}"
+								},
+								"url": {
+									"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/pagarParcelas",
+									"protocol": "https",
+									"host": [
+										"psf-api-hti",
+										"getnet",
+										"com",
+										"br"
+									],
+									"path": [
+										"psf",
+										"v1",
+										"parcela",
+										"pagarParcelas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status 422",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"eval(pm.environment.get(\"tests\"));\r",
+											"eval(pm.environment.get(\"constants_returned_values\"));\r",
+											"\r",
+											"let schema =  {\r",
+											"   \"type\" : \"object\" ,\r",
+											"   \"properties\" : {\r",
+											"     \"dataResposta\" : {\r",
+											"       \"type\" : \"string\"\r",
+											"    },\r",
+											"    \"globalMessage\" : {\r",
+											"       \"tipo\" : \"string\"\r",
+											"    },\r",
+											"    \"detalhe\" : {\r",
+											"       \"tipo\" : \"objeto\"\r",
+											"    },\r",
+											"    \"messages\" : {\r",
+											"       \"type\" : \"array\" ,\r",
+											"       \"items\" : [\r",
+											"        {\r",
+											"          \"type\" : \"object\" ,\r",
+											"           \"properties\" : {\r",
+											"             \"message\" : {\r",
+											"               \"type\" : \"string\"\r",
+											"            }\r",
+											"          },\r",
+											"          \"obrigatório\" : [\r",
+											"             \"mensagem\"\r",
+											"          ]\r",
+											"        }\r",
+											"      ]\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\" : [\r",
+											"     \"dataResposta\" ,\r",
+											"     \"globalMessage\" ,\r",
+											"     \"detail\" ,\r",
+											"     \"messages\"\r",
+											"  ]\r",
+											"};\r",
+											"\r",
+											"let response = pm.response.json();\r",
+											"\r",
+											"checkStatus (422)\r",
+											"contractValidation(schema,response);\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"DEBITO\",\r\n  \"valorDoContrato\": 0\r\n}"
+								},
+								"url": {
+									"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/pagarParcelas",
+									"protocol": "https",
+									"host": [
+										"psf-api-hti",
+										"getnet",
+										"com",
+										"br"
+									],
+									"path": [
+										"psf",
+										"v1",
+										"parcela",
+										"pagarParcelas"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "numeroProposta",
+					"item": [
+						{
+							"name": "Negativo",
+							"item": [
+								{
+									"name": "Status 422 - PRECISA DE ATENÇÂO",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"\r",
+													"let schema = {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"timestamp\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"status\": {\r",
+													"      \"type\": \"integer\"\r",
+													"    },\r",
+													"    \"error\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"message\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"path\": {\r",
+													"      \"type\": \"string\"\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"timestamp\",\r",
+													"    \"status\",\r",
+													"    \"error\",\r",
+													"    \"message\",\r",
+													"    \"path\"\r",
+													"  ]\r",
+													"}\r",
+													"\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (400)\r",
+													"contractValidation(schema,response);\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 065464646546546,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/pagarParcelas",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"parcela",
+												"pagarParcelas"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Status 400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"let schema = {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"timestamp\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"status\": {\r",
+													"      \"type\": \"integer\"\r",
+													"    },\r",
+													"    \"error\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"message\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"path\": {\r",
+													"      \"type\": \"string\"\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"timestamp\",\r",
+													"    \"status\",\r",
+													"    \"error\",\r",
+													"    \"message\",\r",
+													"    \"path\"\r",
+													"  ]\r",
+													"}\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (400)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"let status = 400;\r",
+													"let error = \"Bad Request\";\r",
+													"let path = \"/parcela/pagarParcelas\";\r",
+													"\r",
+													"try{\r",
+													"    var failureInfos = JSON.parse(not_found(response, status, error, path))\r",
+													"     checkReturnValues(failureInfos)\r",
+													"}catch(error){\r",
+													"    pm.test(\"Failed to check values in response body\", () => {\r",
+													"        pm.expect(response.status).to.be.eql(400)\r",
+													"        pm.expect(response.error).to.be.eql('Bad Request')\r",
+													"        pm.expect(response.path).to.be.eql('/parcela/pagarParcelas')\r",
+													"    });\r",
+													"\r",
+													"}  \r",
+													" \r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"48460001\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 05616546546546546466,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/pagarParcelas",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"parcela",
+												"pagarParcelas"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "NumeroContrato",
+					"item": [
+						{
+							"name": "Negativo",
+							"item": [
+								{
+									"name": "Status 422",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"eval(pm.environment.get(\"tests\"));\r",
+													"eval(pm.environment.get(\"constants_returned_values\"));\r",
+													"\r",
+													"let schema =  {\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"dataResposta\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"globalMessage\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"detail\": {\r",
+													"      \"type\": \"object\"\r",
+													"    },\r",
+													"    \"messages\": {\r",
+													"      \"type\": \"array\",\r",
+													"      \"items\": [\r",
+													"        {\r",
+													"          \"type\": \"object\",\r",
+													"          \"properties\": {\r",
+													"            \"message\": {\r",
+													"              \"type\": \"string\"\r",
+													"            }\r",
+													"          },\r",
+													"          \"required\": [\r",
+													"            \"message\"\r",
+													"          ]\r",
+													"        }\r",
+													"      ]\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"dataResposta\",\r",
+													"    \"globalMessage\",\r",
+													"    \"detail\",\r",
+													"    \"messages\"\r",
+													"  ]\r",
+													"};\r",
+													"\r",
+													"let response = pm.response.json();\r",
+													"\r",
+													"checkStatus (422)\r",
+													"contractValidation(schema,response);\r",
+													"\r",
+													"let globalMessage = \"Erro de Recebimento de dados\";\r",
+													"let messages = \"O número do contrato deve ser informado\";\r",
+													"let exception = null;\r",
+													"    \r",
+													"try{\r",
+													"    var failureInfos = JSON.parse(Unprocessable_Entify2(response, globalMessage, messages,exception))\r",
+													"    checkReturnValues(failureInfos)\r",
+													"}catch(error){\r",
+													"    pm.test(\"Failed to check values in response body\", () => {\r",
+													"        pm.expect(response.globalMessage).to.be.eql(\"Contrato - Erro de validação de dados\")\r",
+													"        pm.expect(response.messages[0].message).to.be.eql('O número do contrato deve ser informado')\r",
+													"    });\r",
+													"\r",
+													"}  \r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "KLGkcRvLbBH7nw6FspcOu5Lt3QVl6539",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"codigoCliente\": 0,\r\n  \"dataDaContratacao\": \"\",\r\n  \"numeroContaDock\": \"\",\r\n  \"numeroContrato\": \"\",\r\n  \"numeroDocumento\": \"\",\r\n  \"numeroProposta\": 48445,\r\n  \"parcelas\": [\r\n    1\r\n  ],\r\n  \"saldoContaDock\": 0,\r\n  \"tipoPagamento\": \"BOLETO\",\r\n  \"valorDoContrato\": 0\r\n}"
+										},
+										"url": {
+											"raw": "https://psf-api-hti.getnet.com.br/psf/v1/parcela/pagarParcelas",
+											"protocol": "https",
+											"host": [
+												"psf-api-hti",
+												"getnet",
+												"com",
+												"br"
+											],
+											"path": [
+												"psf",
+												"v1",
+												"parcela",
+												"pagarParcelas"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "URIcancelamento",
+			"value": "https://psf-api-hti.getnet.com.br/"
+		}
+	]
+}
